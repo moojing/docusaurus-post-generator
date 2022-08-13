@@ -39,22 +39,25 @@ async function getTemplateContent(templatePath, title) {
 module.exports = async (template, title, option) => {
   const {type} = option;
   const date = dayjs().format('YYYY-MM-DD')
-  const pureFileName = type==='blog'? 
-  `${date}-${title.split(' ').join('-')}`:
-  `${title.split(' ').join('-')}` ;
+  const [pureTitle, ...potentialFilePath] = title.split('/').reverse()
   
-  const targetFilePath = `${option.type}` || 'doc';
-  const fileNameWithPath = `${targetFilePath}/${pureFileName}`
+
+  const pureFileName = type==='blog'? 
+  `${date}-${pureTitle.split(' ').join('-')}`:
+  `${pureTitle.split(' ').join('-')}` ;
+  
+  const fileType = `${option.type}` || 'doc';
+  const fileNameWithPath = `${fileType}/${potentialFilePath.join('/')}/${pureFileName}`
   const enclosingFolder = path.dirname(fileNameWithPath)
   
   let templateContent = '';
   let isDefaultTemplate = false;
 
   if (fs.existsSync(getTemplateFilePath(template))) {
-    templateContent = await getTemplateContent(getTemplateFilePath(template), title)
+    templateContent = await getTemplateContent(getTemplateFilePath(template), pureTitle)
   } else {
     isDefaultTemplate = true;
-    templateContent = await getTemplateContent(getTemplateFilePath('default'), title)
+    templateContent = await getTemplateContent(getTemplateFilePath('default'), pureTitle)
   }
 
 
@@ -63,11 +66,9 @@ module.exports = async (template, title, option) => {
   }
 
 
-
-
   fs.writeFile(`${fileNameWithPath}.md`, templateContent, function (err) {
     if (err) throw err;
-    let createdMessage = 'Created a new post: ' + pureFileName + '.md'
+    let createdMessage = 'Created a new post: ' + fileNameWithPath + '.md'
     if (isDefaultTemplate) {
       createdMessage += ' with the default template. \nYou can change the template by adding the template folder.'
     }
