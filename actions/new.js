@@ -46,7 +46,7 @@ module.exports = async (template, title, option) => {
   `${date}-${pureTitle.split(' ').join('-')}`:
   `${pureTitle.split(' ').join('-')}` ;
   
-  const fileTypePath = `${option.type.includes('doc')?'docs':'blog'}` || 'blog';
+  const fileTypePath = `${option.type && option.type.includes('doc')?'docs':'blog'}` || 'blog';
   const fileNameWithPath = `${fileTypePath}/${potentialFilePath.join('/')}/${pureFileName}`
   const enclosingFolder = path.dirname(fileNameWithPath)
   
