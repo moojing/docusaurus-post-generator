@@ -4,7 +4,7 @@ const cli = require('commander');
 const newPost = require('./actions/new')
 
 cli.description("A simple CLI for you to generate a docusaurus content file.");
-cli.name("docusaurus-postgen");
+cli.name("docusaurus-post-generator");
 
 cli.usage("<command>");
 cli.addHelpCommand(false);

@@ -1,9 +1,9 @@
 {
-  "name": "docusaurus-postgen",
+  "name": "docusaurus-post-generator",
   "version": "1.0.0",
   "main": "index.js",
   "bin": {
-    "docusaurus-postgen": "index.js"
+    "docusaurus-post-generator": "index.js"
   },
   "license": "MIT",
   "dependencies": {
