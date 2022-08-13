@@ -33,10 +33,19 @@ args:
 - `template`: the corresponding template file in `template` folder.
 - `type (optional)`: the type of the post content, either `doc` or `blog`. 
 
-### 4. command example 
+a example of script might like this: 
+
 ```
 yarn postgen new frontend_template 'A technology of Javascript' 
 ```
+### 4. Add a post to a subfolder of docs/blog
+You can also add a post file into subfolder by adding a prefix like: 
+
+```
+yarn postgen new frontend_template 'javascript/A technology of Javascript'
+```
+
+and a file will be created at `blog/javascript/2022-08-13-A-technology-of-Javascript.md` in your project.
 ## Template Example
 
 ```
