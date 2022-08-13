@@ -21,9 +21,9 @@ async function getTemplateContent(templatePath, title) {
       let tempLine = line
 
       // replace the title value with the title that user provided.
-      if(line.includes('title:')) {
+      if (line.includes('title:')) {
         tempLine = `title: ${title}`
-      }else if (line.includes('slug:')){
+      } else if (line.includes('slug:')) {
         tempLine = `slug: ${title.split(' ').join('-').toLowerCase()}`
       }
       templateContent += tempLine + '\n'
@@ -37,19 +37,22 @@ async function getTemplateContent(templatePath, title) {
 }
 
 module.exports = async (template, title, option) => {
-  const {type} = option;
+  const { type } = option;
   const date = dayjs().format('YYYY-MM-DD')
   const [pureTitle, ...potentialFilePath] = title.split('/').reverse()
-  
 
-  const pureFileName = type==='blog'? 
-  `${date}-${pureTitle.split(' ').join('-')}`:
-  `${pureTitle.split(' ').join('-')}` ;
-  
-  const fileTypePath = `${option.type && option.type.includes('doc')?'docs':'blog'}` || 'blog';
-  const fileNameWithPath = `${fileTypePath}/${potentialFilePath.join('/')}/${pureFileName}`
+
+  const pureFileName = type === 'blog' ?
+    `${date}-${pureTitle.split(' ').join('-')}` :
+    `${pureTitle.split(' ').join('-')}`;
+
+  const fileTypePath = `${option.type && option.type.includes('doc') ? 'docs' : 'blog'}` || 'blog';
+  const fileNameWithPath = potentialFilePath.length > 0 ?
+    `${fileTypePath}/${potentialFilePath.join('/')}/${pureFileName}` :
+    `${fileTypePath}/${pureFileName}`
+    
   const enclosingFolder = path.dirname(fileNameWithPath)
-  
+
   let templateContent = '';
   let isDefaultTemplate = false;
 
@@ -58,12 +61,12 @@ module.exports = async (template, title, option) => {
   } else {
     isDefaultTemplate = true;
     const DEFAULT_TEMPLATE_PATH = '../template/default.md'
-    templateContent = await getTemplateContent(path.resolve(__dirname,DEFAULT_TEMPLATE_PATH), pureTitle)
+    templateContent = await getTemplateContent(path.resolve(__dirname, DEFAULT_TEMPLATE_PATH), pureTitle)
   }
 
 
-  if (!fs.existsSync(enclosingFolder)){
-      fs.mkdirSync(enclosingFolder, { recursive: true });
+  if (!fs.existsSync(enclosingFolder)) {
+    fs.mkdirSync(enclosingFolder, { recursive: true });
   }
 
 
