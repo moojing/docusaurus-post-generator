@@ -46,8 +46,8 @@ module.exports = async (template, title, option) => {
   `${date}-${pureTitle.split(' ').join('-')}`:
   `${pureTitle.split(' ').join('-')}` ;
   
-  const fileType = `${option.type}` || 'doc';
-  const fileNameWithPath = `${fileType}/${potentialFilePath.join('/')}/${pureFileName}`
+  const fileTypePath = `${option.type.includes('doc')?'docs':'blog'}` || 'docs';
+  const fileNameWithPath = `${fileTypePath}/${potentialFilePath.join('/')}/${pureFileName}`
   const enclosingFolder = path.dirname(fileNameWithPath)
   
   let templateContent = '';
@@ -57,7 +57,8 @@ module.exports = async (template, title, option) => {
     templateContent = await getTemplateContent(getTemplateFilePath(template), pureTitle)
   } else {
     isDefaultTemplate = true;
-    templateContent = await getTemplateContent(getTemplateFilePath('default'), pureTitle)
+    const DEFAULT_TEMPLATE_PATH = '../template/default.md'
+    templateContent = await getTemplateContent(path.resolve(__dirname,DEFAULT_TEMPLATE_PATH), pureTitle)
   }
 
 
