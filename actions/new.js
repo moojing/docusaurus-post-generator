@@ -2,6 +2,7 @@
 
 // include node fs module
 var fs = require('fs')
+var path = require('path')
 const dayjs = require('dayjs')
 const readline = require('node:readline');
 
@@ -35,11 +36,17 @@ async function getTemplateContent(templatePath, title) {
 
 }
 
-module.exports = async (template, title) => {
-
+module.exports = async (template, title, option) => {
+  const {type} = option;
   const date = dayjs().format('YYYY-MM-DD')
-
-  const fileName = `${date}-${title.split(' ').join('-')}`;
+  const pureFileName = type==='blog'? 
+  `${date}-${title.split(' ').join('-')}`:
+  `${title.split(' ').join('-')}` ;
+  
+  const targetFilePath = `${option.type}` || 'doc';
+  const fileNameWithPath = `${targetFilePath}/${pureFileName}`
+  const enclosingFolder = path.dirname(fileNameWithPath)
+  
   let templateContent = '';
   let isDefaultTemplate = false;
 
@@ -51,10 +58,16 @@ module.exports = async (template, title) => {
   }
 
 
+  if (!fs.existsSync(enclosingFolder)){
+      fs.mkdirSync(enclosingFolder, { recursive: true });
+  }
 
-  fs.writeFile(`${fileName}.md`, templateContent, function (err) {
+
+
+
+  fs.writeFile(`${fileNameWithPath}.md`, templateContent, function (err) {
     if (err) throw err;
-    let createdMessage = 'Created a new post: ' + fileName + '.md'
+    let createdMessage = 'Created a new post: ' + pureFileName + '.md'
     if (isDefaultTemplate) {
       createdMessage += ' with the default template. \nYou can change the template by adding the template folder.'
     }
