@@ -31,7 +31,7 @@ yarn postgen new [template] [post_name] --type [type]
 args: 
 - `post_name`: the post file name you want to add with.
 - `template`: the corresponding template file in `template` folder.
-- `type (optional)`: the type of the post content, either `doc` or `blog`. 
+- `type (optional)`: the type of the post content, either `doc` or `blog`, default set to `blog`. 
 
 a example of script might like this: 
 
