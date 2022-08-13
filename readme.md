@@ -12,6 +12,7 @@ docusaurus-post-generator
 ```
 ...
   "scripts": {
+    ...
     "postgen":"docusaurus-post-generator"  
   }
 ...
@@ -25,7 +26,7 @@ yarn postgen new [post_name] [template] --type [type]
 ```
 args: 
 - `post_name`: the post file name you want to add with.
-- `template`: the corresponding template file in template folder.
+- `template`: the corresponding template file in `template` folder.
 - `type (optional)`: the type of the post content, either `doc` or `blog`. 
 
 ## Template Example
