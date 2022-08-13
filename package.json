@@ -9,5 +9,8 @@
   "dependencies": {
     "commander": "^9.4.0",
     "dayjs": "^1.11.5"
+  },
+  "engines": {
+    "node": ">=16.14"
   }
 }
