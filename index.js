@@ -17,6 +17,7 @@ cli
   .command("new")
   .argument("<template>", "The template to use for the new post.")
   .argument("<title>", "The title of the post.")
+  .option("-t, --type", "Declare the type of the post, either 'doc' of 'blog")
   .description(
     `Generate a new post from a template. 
       If no template is provided, 
