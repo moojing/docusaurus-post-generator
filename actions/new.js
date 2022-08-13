@@ -35,9 +35,10 @@ async function getTemplateContent(templatePath, title) {
   return templateContent
 
 }
+const DEFAULT_TYPE = 'blog';
 
 module.exports = async (template, title, option) => {
-  const { type } = option;
+  const { type = DEFAULT_TYPE } = option;
   const date = dayjs().format('YYYY-MM-DD')
   const [pureTitle, ...potentialFilePath] = title.split('/').reverse()
 
@@ -46,11 +47,11 @@ module.exports = async (template, title, option) => {
     `${date}-${pureTitle.split(' ').join('-')}` :
     `${pureTitle.split(' ').join('-')}`;
 
-  const fileTypePath = `${option.type && option.type.includes('doc') ? 'docs' : 'blog'}` || 'blog';
+  const fileTypePath = `${option.type && option.type.includes('doc') ? 'docs' : 'blog'}` || DEFAULT_TYPE;
   const fileNameWithPath = potentialFilePath.length > 0 ?
     `${fileTypePath}/${potentialFilePath.join('/')}/${pureFileName}` :
     `${fileTypePath}/${pureFileName}`
-    
+
   const enclosingFolder = path.dirname(fileNameWithPath)
 
   let templateContent = '';
