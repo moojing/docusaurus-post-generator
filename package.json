@@ -5,6 +5,11 @@
     "email": "starts789@gmail.com",
     "url": "https://www.linkedin.com/in/mu-jing-tsai/"
   },
+  "keywords": [
+    "docusaurus",
+    "generator"
+  ],
+  "homepage": "https://github.com/moojing/docusaurus-post-generator",
   "version": "1.0.0",
   "main": "index.js",
   "bin": {
