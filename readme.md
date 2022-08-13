@@ -1,4 +1,6 @@
-docusaurus-post-generator
+# docusaurus-post-generator
+![demo](https://user-images.githubusercontent.com/11360957/184494907-0daa1973-d343-40fe-a72b-2fa7819044fa.gif)
+
 
 ## How to Use ?
 ###  1. Install
