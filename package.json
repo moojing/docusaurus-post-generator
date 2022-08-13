@@ -1,5 +1,10 @@
 {
   "name": "docusaurus-post-generator",
+  "author": {
+    "name": "Mu Jing Tsai",
+    "email": "starts789@gmail.com",
+    "url": "https://www.linkedin.com/in/mu-jing-tsai/"
+  },
   "version": "1.0.0",
   "main": "index.js",
   "bin": {
