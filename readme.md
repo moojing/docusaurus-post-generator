@@ -26,13 +26,17 @@ A cli tool like [hexo](https://hexo.io/docs/writing.html)'s `hexo new [post name
 ### 3. run script with `new` command
 
 ```
-yarn postgen new [post_name] [template] --type [type] 
+yarn postgen new [template] [post_name] --type [type] 
 ```
 args: 
 - `post_name`: the post file name you want to add with.
 - `template`: the corresponding template file in `template` folder.
 - `type (optional)`: the type of the post content, either `doc` or `blog`. 
 
+### 4. command example 
+```
+yarn postgen new frontend_template 'A technology of Javascript' 
+```
 ## Template Example
 
 ```
